@@ -4,11 +4,11 @@ from django.db import models
 class Post(models.Model):
 
     CURRENCY_CHOICES = (
-        (0, ('KZT')),
-        (1, ('USD')),
-        (2, ('EUR')),
-        (3, ('RUB')),
-        (4, ('CNY')),
+        ('KZT', ('KZT')),
+        ('USD', ('USD')),
+        ('EUR', ('EUR')),
+        ('RUB', ('RUB')),
+        ('CNY', ('CNY')),
     )
 
     CATEGORY_CHOICES = (
@@ -35,7 +35,7 @@ class Post(models.Model):
 
     name = models.CharField(max_length=100)
     price = models.FloatField(default=0,)
-    currency = models.PositiveSmallIntegerField(default=0, choices=CURRENCY_CHOICES)
+    currency = models.CharField(default='KZT', choices=CURRENCY_CHOICES, max_length=10)
     min_order = models.PositiveIntegerField(default=1,)
     measure = models.CharField(max_length=20)
     category = models.PositiveSmallIntegerField (default=0, choices=CATEGORY_CHOICES)
