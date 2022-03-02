@@ -4,19 +4,21 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
-from user_app.serializers import RegistrationSerializer
+from rest_framework.views import APIView
+from user_app.serializers import RegistrationSerializer, LoginSerializer
 from user_app import models
 
-@api_view(['POST'])
-def logout_view(request):
-    if request.method == 'POST':
+
+class LogoutView(APIView):
+    
+    def post(self, request, format=None):
         request.user.auth_token.delete()
         return Response(status=status.HTTP_200_OK)
 
 
-@api_view(['POST'])
-def registration_view(request, *args, **kwargs):
-    if request.method == 'POST':
+class RegistrationView(APIView):
+
+    def post(self, request, format=None):
         serializer = RegistrationSerializer(data = request.data)
         data = {}
 
@@ -37,3 +39,14 @@ def registration_view(request, *args, **kwargs):
             data = serializer.errors
 
         return Response(data)
+
+
+class LoginView(APIView):
+
+    def post(self, request, format=None):
+        serializer = LoginSerializer(data = request.data)
+        data = {}
+
+        # if serializer.is_valid():
+            
+
