@@ -30,13 +30,16 @@ class RegistrationSerializer(serializers.ModelSerializer):
         return account
 
         
-class LoginSerializer(serializers.ModelSerializer):
+# class LoginSerializer(serializers.ModelSerializer):
 
-    class Meta:
-        model = User
-        fields = ['username', 'password']
+#     class Meta:
+#         model = User
+#         fields = ['username', 'password']
 
-        def check(self):
+#         def check(self):
     
-            password = self.validated_data['password']
+#             password = self.validated_data['password']
+
+#             user = User.objects.filter(username=self.validated_data['username'])
             
+
