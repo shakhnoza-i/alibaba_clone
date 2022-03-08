@@ -1,6 +1,7 @@
 import datetime
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django_countries.fields import CountryField
 
 
 def current_year():
@@ -23,10 +24,11 @@ class Company(models.Model):
     name = models.CharField(max_length=100)
     year_established = models.IntegerField((' year'), validators=[MinValueValidator(1984), max_value_current_year])
     main_products = models.CharField(max_length=1000)
-    location = models.CharField(max_length=300)
+    location = CountryField()
+    address = models.CharField(max_length=1000, default=None)
     employee_сount = models.PositiveSmallIntegerField (default=0, choices=EMPLOYEE_COUNT)
-    transaction_count = models.PositiveIntegerField(default=0) # order_quantity
-    transaction_amount = models.PositiveIntegerField(default=0)
+    transaction_count = models.PositiveIntegerField(default=0) # order quantity - like book.number_rating
+    transaction_amount = models.PositiveIntegerField(default=0) # sum of orders - like book.avg_rating
 
     def __str__(self): 
         return self.name
