@@ -1,4 +1,16 @@
+import uuid
+import os
+
+from django.conf import settings
 from django.db import models
+
+
+def recipe_image_file_path(instance, filename):
+    """Generate file path for new post image"""
+    ext = filename.split('.')[-1]
+    filename = f'{uuid.uuid4()}.{ext}'
+
+    return os.path.join('uploads/post/', filename)
 
 
 class Post(models.Model):
@@ -33,6 +45,7 @@ class Post(models.Model):
         (3, ('Availability unknown')),
     )
 
+    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None)
     name = models.CharField(max_length=100)
     price = models.FloatField(default=0,)
     currency = models.CharField(default='KZT', choices=CURRENCY_CHOICES, max_length=10)
@@ -41,6 +54,7 @@ class Post(models.Model):
     category = models.PositiveSmallIntegerField (default=0, choices=CATEGORY_CHOICES)
     availability = models.PositiveSmallIntegerField(default=0, choices=AVAILABILITY_CHOICES)
     detailed_description = models.CharField(max_length=3000, null=True)
+    image = models.ImageField(null=True, upload_to=recipe_image_file_path)
 
     def __str__(self): 
         return self.name
