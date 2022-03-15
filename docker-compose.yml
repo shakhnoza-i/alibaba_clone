@@ -16,14 +16,16 @@ services:
       - DB_NAME=core
       - DB_USER=postgres
       - DB_PASS=supersecretpassword
+    restart: on-failure
     depends_on:
       - db
 
   db:
     image: postgres:10-alpine
     ports:
-      - 5435:5435
+      - 5435:5433
     environment:
       - POSTGRES_DB=core
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=supersecretpassword
+    restart: on-failure

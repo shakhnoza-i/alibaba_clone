@@ -14,7 +14,7 @@ class CompanySerializerDisplay(serializers.ModelSerializer):
             'transaction_count', 'transaction_amount'
             ]
         # fields = "__all__"
-        read_only_fields=('transaction_count','transaction_amount')
+        read_only_fields=('id','transaction_count','transaction_amount')
 
 
 class CompanySerializer(serializers.ModelSerializer):
@@ -23,5 +23,5 @@ class CompanySerializer(serializers.ModelSerializer):
         model = Company
         fields = "__all__"
 
-    read_only_fields=('transaction_count','transaction_amount')
+    read_only_fields=('id','transaction_count','transaction_amount')
     
