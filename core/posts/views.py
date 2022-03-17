@@ -16,7 +16,7 @@ class PostViewSet(viewsets.ModelViewSet): # this viewset provide all functionali
     filter_backends = (filters.DjangoFilterBackend, SearchFilter ,OrderingFilter)
     filter_fields = ('currency', 'category', 'availability',)
     ordering =('price',)
-    search_fields =('name', 'detailed_description',)
+    search_fields = ('name', 'detailed_description',)
 
     def get_serializer_class(self):
         """Return appropriate serializer class"""

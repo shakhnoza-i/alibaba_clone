@@ -47,7 +47,7 @@ class Post(models.Model):
 
     # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None)
     name = models.CharField(max_length=100)
-    price = models.FloatField(default=0,)
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     currency = models.CharField(default='KZT', choices=CURRENCY_CHOICES, max_length=10)
     min_order = models.PositiveIntegerField(default=1,)
     measure = models.CharField(max_length=20)
