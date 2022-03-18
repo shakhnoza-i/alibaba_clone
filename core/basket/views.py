@@ -10,7 +10,7 @@ def basket_summary(request):
     return JsonResponse(request, {'basket': basket})
 
 
-def basket_add(request):
+def basket_add(request): # self, productid, productqty
     basket = Basket(request) # retrieve session data
     if request.POST.get('action') == 'post':
         product_id = int(request.POST.get('productid'))
