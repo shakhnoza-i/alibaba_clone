@@ -8,6 +8,7 @@ from django_filters import rest_framework as filters
 
 from posts.models import Post
 from posts.serializers import PostSerializer, PostSerializerDisplay
+from pagination import TenCountPagination
 
 
 class PostViewSet(viewsets.ModelViewSet): # this viewset provide all functionality
@@ -17,6 +18,7 @@ class PostViewSet(viewsets.ModelViewSet): # this viewset provide all functionali
     filter_fields = ('currency', 'category', 'availability',)
     ordering =('price',)
     search_fields = ('name', 'detailed_description',)
+    pagination_class = TenCountPagination
 
     def get_serializer_class(self):
         """Return appropriate serializer class"""
