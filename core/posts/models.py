@@ -53,8 +53,13 @@ class Post(models.Model):
     measure = models.CharField(max_length=20)
     category = models.PositiveSmallIntegerField (default=0, choices=CATEGORY_CHOICES)
     availability = models.PositiveSmallIntegerField(default=0, choices=AVAILABILITY_CHOICES)
+    avg_rating = models.FloatField(default=0)
+    number_rating = models.IntegerField(default=0)
     detailed_description = models.CharField(max_length=3000, null=True)
     image = models.ImageField(null=True, upload_to=post_image_file_path)
 
     def __str__(self): 
         return self.name
+
+    def cost(self):
+        return self.price

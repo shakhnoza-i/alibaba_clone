@@ -10,9 +10,11 @@ class PostSerializerDisplay(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = [
-            'name', 'price', 'currency', 'min_order', 'measure', 
-            'category', 'availability', 'detailed_description', 'image'
+            'id','name', 'price', 'currency', 'min_order', 'measure', 
+            'category', 'availability', 'detailed_description', 
+            'avg_rating', 'number_rating', 'image'
         ]
+        read_only_fields = ('avg_rating', 'number_rating')
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -20,3 +22,10 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = "__all__"
+        read_only_fields = ('avg_rating', 'number_rating')
+
+
+class PostOrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ['id', 'name', 'price']
