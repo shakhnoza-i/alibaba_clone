@@ -11,11 +11,11 @@ class CartSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cart
-        fields = ('id', 'user', 'product_id', 'name', 'quantity')
-        read_only_fields = ('id', 'name')
+        fields = ('id', 'user', 'post', 'name', 'price', 'quantity')
+        read_only_fields = ('id', 'user', 'name', 'price',)
 
     def get_name(self):
-        return self.product.name
+        return self.post.name
 
     def get_price(self):
-        return self.product.price
+        return self.post.price
