@@ -6,7 +6,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('posts/', include('posts.urls')),
-    path('post_cart/', include('cart.urls')),
+    path('cart/', include('cart.urls')),
     path('post_review/', include('review.urls')),
     path('account/', include('user_app.urls')),
     path('companies/', include('companies.urls')),
