@@ -1,3 +1,5 @@
+from decimal import Decimal
+
 from rest_framework import viewsets, generics, status
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
@@ -26,13 +28,18 @@ class CartCreate(generics.CreateAPIView):
         serializer.save(user=user, name=post.name, price=post.price)
 
 
-class CartList(generics.ListAPIView):
+class CartList(generics.ListCreateAPIView):
     """View all reviews for particular post"""
     serializer_class = CartSerializer
     permission_classes = [IsAdminUser]
     def get_queryset(self):
         user = self.request.user
-        return Cart.objects.filter(user=user)
+        cart_queryset = Cart.objects.filter(user=user)
+        total_sum = sum(Decimal(item.price) * item.quantity for item in cart_queryset)
+        data = {"list": cart_queryset, "total_sum": total_sum}
+        return data
+
+        # return Response(data, status=None, template_name=None, headers=None, content_type=None)
 
 
 class CartDetail(generics.RetrieveUpdateDestroyAPIView):
