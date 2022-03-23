@@ -4,7 +4,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
 from rest_framework import generics
-from permissions import AdminOrReadOnly, ReviewUserOrreadOnly
+from permissions import AdminOrReadOnly, OwnerOrReadOnly
 from posts.models import Post
 from review.models import Review
 from review.serializers import ReviewSerializer
@@ -22,7 +22,7 @@ class ReviewCreate(generics.CreateAPIView):
         post = Post.objects.get(pk=pk)
 
         viewer = self.request.user
-        review_queryset = Review.objects.filter(post=post,review_user=viewer)
+        review_queryset = Review.objects.filter(post=post,user=viewer)
        
         if review_queryset.exists():
             raise ValidationError("You have already reviewed this product!")
@@ -35,7 +35,7 @@ class ReviewCreate(generics.CreateAPIView):
         post.number_rating = post.number_rating + 1
         post.save()
 
-        serializer.save(post=post,review_user=viewer)
+        serializer.save(post=post,user=viewer)
      
 
 class ReviewList(generics.ListAPIView):
@@ -49,4 +49,4 @@ class ReviewList(generics.ListAPIView):
 class ReviewDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
-    permission_classes = [ReviewUserOrreadOnly]
+    permission_classes = [OwnerOrReadOnly]
