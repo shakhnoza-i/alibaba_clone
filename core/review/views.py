@@ -2,7 +2,6 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
-from rest_framework.views import APIView
 from rest_framework import generics
 from permissions import AdminOrReadOnly, OwnerOrReadOnly
 from posts.models import Post
@@ -21,9 +20,11 @@ class ReviewCreate(generics.CreateAPIView):
         pk = self.kwargs.get('pk')
         post = Post.objects.get(pk=pk)
 
+        if post.DoesNotExist:
+            raise ValidationError("This post does not exist!")
+
         viewer = self.request.user
         review_queryset = Review.objects.filter(post=post,user=viewer)
-       
         if review_queryset.exists():
             raise ValidationError("You have already reviewed this product!")
 
@@ -41,6 +42,7 @@ class ReviewCreate(generics.CreateAPIView):
 class ReviewList(generics.ListAPIView):
     """View all reviews for particular post"""
     serializer_class = ReviewSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
     def get_queryset(self):
         pk=self.kwargs['pk']
         return Review.objects.filter(post=pk)
