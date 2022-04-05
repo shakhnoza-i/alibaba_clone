@@ -2,6 +2,7 @@
       Python
       Django
       Django Rest Framework
+      Django ORM
       Docker
       Docker-Compose
       Postgres
