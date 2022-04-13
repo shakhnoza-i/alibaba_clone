@@ -34,18 +34,3 @@ class CartSumSerializer(serializers.ModelSerializer):
         model = Cart
         fields = ('id', 'user', 'post', 'name', 'price', 'quantity', 'sum_individual')
         read_only_fields = ('id', 'user', 'name', 'price', 'sum_individual')
-
-
-class CartTotalSumSerializer(serializers.ModelSerializer):
-
-    user = serializers.StringRelatedField(read_only=True)
-    sum_individual = serializers.SerializerMethodField('individual_sum')
-
-    def individual_sum(self, cart):
-        sum_individual = Decimal(cart.price) * cart.quantity
-        return sum_individual
-
-    class Meta:
-        model = Cart
-        fields = ('id', 'user', 'post', 'name', 'price', 'quantity', 'sum_individual')
-        read_only_fields = ('id', 'user', 'name', 'price', 'sum_individual')

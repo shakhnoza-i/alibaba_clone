@@ -28,12 +28,19 @@ class CartCreate(generics.CreateAPIView):
 class CartList(generics.ListAPIView):
     """View all reviews for particular post"""
     serializer_class = CartSumSerializer
-    permission_classes = [IsAdminUser]
-    def list(self, request):
+    permission_classes = [OwnerOrReadOnly]
+
+    def get_queryset(self):
         user = self.request.user
         cart_queryset = Cart.objects.filter(user=user)
-        total_sum = sum(Decimal(item.price) * item.quantity for item in cart_queryset)
-        return Response(total_sum)     
+        return cart_queryset    
+
+    # def get_queryset(self):
+    #     user = self.request.user
+    #     cart_queryset = Cart.objects.filter(user=user)
+    #     total_sum = sum(Decimal(item.price) * item.quantity for item in cart_queryset)
+    #     data = {"total_sum": total_sum}
+    #     return Response(data) 
 
 
 class CartDetail(generics.RetrieveUpdateDestroyAPIView):
