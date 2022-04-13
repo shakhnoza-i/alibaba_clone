@@ -35,13 +35,6 @@ class CartList(generics.ListAPIView):
         cart_queryset = Cart.objects.filter(user=user)
         return cart_queryset    
 
-    # def get_queryset(self):
-    #     user = self.request.user
-    #     cart_queryset = Cart.objects.filter(user=user)
-    #     total_sum = sum(Decimal(item.price) * item.quantity for item in cart_queryset)
-    #     data = {"total_sum": total_sum}
-    #     return Response(data) 
-
 
 class CartDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Cart.objects.all()

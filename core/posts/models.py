@@ -15,7 +15,6 @@ def post_image_file_path(instance, filename):
 
 class Post(models.Model):
 
-
     CATEGORY_CHOICES = (
         (0, ('Agriculture & Food')),
         (1, ('Apparel,Textiles & Accessories')),

@@ -14,12 +14,6 @@ class CartSerializer(serializers.ModelSerializer):
         fields = ('id', 'user', 'post', 'name', 'price', 'quantity')
         read_only_fields = ('id', 'user', 'name', 'price',)
 
-    def get_name(self):
-        return self.post.name
-
-    def get_price(self):
-        return self.post.price
-
 
 class CartSumSerializer(serializers.ModelSerializer):
 

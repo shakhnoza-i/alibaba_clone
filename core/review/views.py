@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework import generics
-from permissions import AdminOrReadOnly, OwnerOrReadOnly
+from permissions import OwnerOrReadOnly
 from posts.models import Post
 from review.models import Review
 from review.serializers import ReviewSerializer
