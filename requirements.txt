@@ -3,6 +3,7 @@ backports.zoneinfo==0.2.1
 Django
 django-countries==7.3.2
 django-filter==21.1
+django-extensions
 django-multiselectfield==0.1.12
 djangorestframework==3.13.1
 djangorestframework-simplejwt==5.0.0
@@ -12,3 +13,4 @@ psycopg2
 pillow
 sqlparse==0.4.2
 typing-extensions==4.1.1
+

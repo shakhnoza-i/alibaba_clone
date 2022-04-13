@@ -31,14 +31,8 @@ class CartList(generics.ListAPIView):
     def list(self, request):
         user = self.request.user
         cart_queryset = Cart.objects.filter(user=user)
-        # total_sum = sum(item.sum_individual for item in cart_queryset)
         total_sum = sum(Decimal(item.price) * item.quantity for item in cart_queryset)
-        return Response(total_sum)
-        # data = {cart_queryset}
-        # serializer = CartSumSerializer(data=data)
-        # if serializer.is_valid():
-
-        #     return Response(data)       
+        return Response(total_sum)     
 
 
 class CartDetail(generics.RetrieveUpdateDestroyAPIView):

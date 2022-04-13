@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
+    'django_extensions',
 
     'posts', 
     'cart',
