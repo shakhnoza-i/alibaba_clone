@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from posts.models import Post
 from cart.models import Cart
 from cart.serializers import CartSerializer, CartSumSerializer
+from permissions  import OwnerOrReadOnly
 
 
 class CartCreate(generics.CreateAPIView):
@@ -38,4 +39,4 @@ class CartList(generics.ListAPIView):
 class CartDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Cart.objects.all()
     serializer_class = CartSumSerializer
-    permission_classes = [IsAdminUser]
+    permission_classes = [OwnerOrReadOnly]

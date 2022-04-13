@@ -38,7 +38,7 @@ class Post(models.Model):
         (3, ('Availability unknown')),
     )
 
-    # user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=None)
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     currency = models.CharField(default='KZT', max_length=10)
